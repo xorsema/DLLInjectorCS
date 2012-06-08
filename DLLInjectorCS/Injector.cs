@@ -1,0 +1,94 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
+using System.Threading;
+
+namespace DLLInjectorCS
+{    
+    class Injector
+    {
+        public string fileName;
+        private IntPtr procHandle;
+        private IntPtr loadLibAddr;
+        private string procName;
+        private static Thread curThread;
+
+        public void setTargetById(int id)
+        {
+            procHandle = Natives.OpenProcess(Natives.ProcessAccessFlags.All, false, id);
+        }
+
+        public bool injectDll()
+        {
+            byte[] flnBuf = System.Text.Encoding.ASCII.GetBytes(fileName);
+            uint flnSize = (uint)flnBuf.Length;
+            UIntPtr outBuf;
+            IntPtr newMem;
+            IntPtr remoteThread;
+            bool result = false;
+                
+            newMem = Natives.VirtualAllocEx(procHandle, (IntPtr)0, flnSize, Natives.AllocationType.Commit, Natives.MemoryProtection.ReadWrite);
+            if (Natives.WriteProcessMemory(procHandle, newMem, flnBuf, flnSize, out outBuf) == false)
+                return false;
+            remoteThread = Natives.CreateRemoteThread(procHandle, (IntPtr)0, 0, loadLibAddr, newMem, 0, (IntPtr)0);
+            if (remoteThread != (IntPtr)0)
+                result = (bool)(Natives.WaitForSingleObject(remoteThread, 10000) != Natives.WAIT_TIMEOUT);
+            else
+                MessageBox.Show(Marshal.GetLastWin32Error().ToString());
+
+
+            Natives.VirtualFreeEx(procHandle, newMem, flnSize, Natives.FreeType.Decommit);
+
+            return result;
+        }
+
+        private void injectOnProcStart()
+        {
+            //So if procName changes during the wait it won't change in this thread
+            string t = string.Copy(procName); 
+            Process[] procs = Process.GetProcessesByName(t);
+            while (procs.Length == 0)
+            {
+                Thread.Sleep(1000);
+                procs = Process.GetProcessesByName(t);
+            }
+            setTargetById(procs[0].Id);
+            injectDll();
+        }
+
+        public void startInjectingThread(string s)
+        {
+            if (curThread != null)
+                curThread.Abort();
+            procName = s;
+            curThread = new Thread(new ThreadStart(injectOnProcStart));
+            curThread.Start();
+        }
+
+        public static Thread getThread()
+        {
+            return curThread;
+        }
+
+        public Injector()
+        {
+            IntPtr kernel32 = Natives.GetModuleHandle("Kernel32");
+            loadLibAddr = Natives.GetProcAddress(kernel32, "LoadLibraryA");
+        }
+
+        public Injector(string fln) : this()
+        {
+            this.fileName = fln;
+        }
+
+        public Injector(string fln, int id)
+            : this(fln)
+        {
+            setTargetById(id);
+        }
+    }
+}
