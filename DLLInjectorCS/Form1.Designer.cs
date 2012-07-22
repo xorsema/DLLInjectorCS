@@ -37,12 +37,13 @@
             this.button3 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
-            this.label3 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -135,8 +136,17 @@
             this.tabPage1.Text = "Inject";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(194, 33);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 87);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Pick a process from the list.";
+            // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button5);
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.button4);
             this.tabPage2.Controls.Add(this.textBox2);
@@ -180,13 +190,16 @@
             this.openFileDialog2.Filter = "Executables|*.exe";
             this.openFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog2_FileOk);
             // 
-            // label3
+            // button5
             // 
-            this.label3.Location = new System.Drawing.Point(194, 33);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 87);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Pick a process from the list.";
+            this.button5.Enabled = false;
+            this.button5.Location = new System.Drawing.Point(93, 94);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 3;
+            this.button5.Text = "Cancel";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // DLLInjector
             // 
@@ -226,6 +239,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button5;
     }
 }
 

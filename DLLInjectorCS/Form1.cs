@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace DLLInjectorCS
 {
@@ -45,7 +46,8 @@ namespace DLLInjectorCS
             else if (tabControl1.SelectedIndex == 1)
             {
                 Injector i = new Injector(textBox1.Text);
-                i.startInjectingThread(textBox2.Text);
+                i.startInjectingThread(textBox2.Text, new InjectedCallback(injectSuccess));
+                button5.Enabled = true;
             }
         }
 
@@ -67,6 +69,28 @@ namespace DLLInjectorCS
         private void openFileDialog2_FileOk(object sender, CancelEventArgs e)
         {
             textBox2.Text = Program.stripExeName(openFileDialog2.FileName);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Thread t;
+            if ((t = Injector.getThread()) != null)
+            {
+                t.Abort();
+                button5.Enabled = false;
+            }
+        }
+
+        private void injectSuccess()
+        {
+            if (this.button5.InvokeRequired)
+            {
+                this.Invoke(new InjectedCallback(injectSuccess));
+            }
+            else
+            {
+                button5.Enabled = false;
+            }
         }
     }
 }

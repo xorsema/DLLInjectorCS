@@ -8,7 +8,9 @@ using System.Windows.Forms;
 using System.Threading;
 
 namespace DLLInjectorCS
-{    
+{
+    public delegate void InjectedCallback();
+
     class Injector
     {
         public string fileName;
@@ -16,6 +18,7 @@ namespace DLLInjectorCS
         private IntPtr loadLibAddr;
         private string procName;
         private static Thread curThread;
+        private InjectedCallback injectedCb;
 
         public void setTargetById(int id)
         {
@@ -48,23 +51,33 @@ namespace DLLInjectorCS
 
         private void injectOnProcStart()
         {
-            //So if procName changes during the wait it won't change in this thread
-            string t = string.Copy(procName); 
-            Process[] procs = Process.GetProcessesByName(t);
-            while (procs.Length == 0)
+            try
             {
-                Thread.Sleep(1000);
-                procs = Process.GetProcessesByName(t);
+                //So if procName changes during the wait it won't change in this thread
+                string t = string.Copy(procName);
+                Process[] procs = Process.GetProcessesByName(t);
+                while (procs.Length == 0)
+                {
+                    Thread.Sleep(1000);
+                    procs = Process.GetProcessesByName(t);
+                }
+                setTargetById(procs[0].Id);
+                injectDll();
+                if (injectedCb != null)
+                    injectedCb();
             }
-            setTargetById(procs[0].Id);
-            injectDll();
+            catch (ThreadAbortException e)
+            {
+                return;
+            }
         }
 
-        public void startInjectingThread(string s)
+        public void startInjectingThread(string s, InjectedCallback cb)
         {
             if (curThread != null)
                 curThread.Abort();
             procName = s;
+            injectedCb = cb;
             curThread = new Thread(new ThreadStart(injectOnProcStart));
             curThread.Start();
         }
