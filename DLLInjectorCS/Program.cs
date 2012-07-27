@@ -19,24 +19,6 @@ namespace DLLInjectorCS
             Application.Run(new DLLInjector());
         }
 
-        public static Process[] curProcSnapshot { get; set; }
-
-        public static string[] getProcSnapStrings()
-        {
-            string[] result = new string[curProcSnapshot.Length];
-            for (int i = 0; i < result.Length; i++)
-            {
-                result[i] = curProcSnapshot[i].ProcessName;
-            }
-
-            return result;
-        }
-
-        public static void takeProcSnapshot()
-        {
-            curProcSnapshot = Process.GetProcesses();
-        }
-
         public static string stripExeName(string s)
         {
             string result = string.Copy(s);
