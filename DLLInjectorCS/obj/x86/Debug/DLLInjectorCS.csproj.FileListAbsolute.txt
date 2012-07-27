@@ -1,0 +1,10 @@
+c:\users\max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\obj\x86\Debug\DLLInjectorCS.Properties.Resources.resources
+c:\users\max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\obj\x86\Debug\GenerateResource.read.1.tlog
+c:\users\max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\obj\x86\Debug\GenerateResource.write.1.tlog
+c:\users\max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\bin\Debug\DLLInjectorCS.exe
+c:\users\max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\bin\Debug\DLLInjectorCS.pdb
+c:\users\max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\obj\x86\Debug\DLLInjectorCS.exe
+c:\users\max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\obj\x86\Debug\DLLInjectorCS.pdb
+C:\Users\Max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\obj\x86\Debug\DLLInjectorCS.DLLInjector.resources
+C:\Users\Max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\bin\Debug\DLLInjectorCS.exe.config

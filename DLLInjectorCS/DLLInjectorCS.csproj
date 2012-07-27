@@ -73,6 +73,7 @@
     </Compile>
     <Compile Include="Injector.cs" />
     <Compile Include="Natives.cs" />
+    <Compile Include="ProcsSnap.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

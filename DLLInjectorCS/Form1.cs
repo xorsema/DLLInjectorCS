@@ -7,16 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using System.Diagnostics;
 
 namespace DLLInjectorCS
 {
     public partial class DLLInjector : Form
     {
+        private ProcsSnap procsSnap;
         public DLLInjector()
         {
             InitializeComponent();
-            Program.takeProcSnapshot();
-            listBox1.Items.AddRange(Program.getProcSnapStrings());
+            procsSnap = new ProcsSnap();
+            listView1.Items.AddRange(procsSnap.LVItems);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -31,16 +33,16 @@ namespace DLLInjectorCS
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Program.takeProcSnapshot();
-            listBox1.Items.Clear();
-            listBox1.Items.AddRange(Program.getProcSnapStrings());
+            procsSnap.Refresh();
+            listView1.Items.Clear();
+            listView1.Items.AddRange(procsSnap.LVItems);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             if (tabControl1.SelectedIndex == 0)
             {
-                Injector i = new Injector(textBox1.Text, Program.curProcSnapshot[listBox1.SelectedIndex].Id);
+                Injector i = new Injector(textBox1.Text, ((Process)listView1.SelectedItems[0].Tag).Id);
                 i.injectDll();
             }
             else if (tabControl1.SelectedIndex == 1)
