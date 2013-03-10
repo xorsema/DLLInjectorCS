@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DLLInjector));
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -41,6 +42,7 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button5 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
@@ -161,6 +163,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.checkBox1);
             this.tabPage2.Controls.Add(this.button5);
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.button4);
@@ -172,6 +175,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Auto Inject";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(178, 75);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(74, 17);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "Suspend?";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
@@ -191,7 +204,7 @@
             this.label2.Size = new System.Drawing.Size(242, 43);
             this.label2.TabIndex = 2;
             this.label2.Text = "Browse for an exe.  Final text should be without extension.  First process of the" +
-                " specified name will be injected.";
+    " specified name will be injected.";
             // 
             // button4
             // 
@@ -226,6 +239,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DLLInjector";
             this.Text = "DLLInjector";
             this.tabControl1.ResumeLayout(false);
@@ -257,6 +271,7 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 

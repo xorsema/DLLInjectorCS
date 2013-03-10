@@ -48,6 +48,7 @@ namespace DLLInjectorCS
             else if (tabControl1.SelectedIndex == 1)
             {
                 Injector i = new Injector(textBox1.Text);
+                i.suspendOnInject = checkBox1.Checked;
                 i.startInjectingThread(textBox2.Text, new InjectedCallback(injectSuccess));
                 button5.Enabled = true;
             }

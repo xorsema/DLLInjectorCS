@@ -20,6 +20,8 @@ namespace DLLInjectorCS
         private static Thread curThread;
         private InjectedCallback injectedCb;
 
+        public bool suspendOnInject;
+
         public void setTargetById(int id)
         {
             procHandle = Natives.OpenProcess(Natives.ProcessAccessFlags.All, false, id);
@@ -62,9 +64,20 @@ namespace DLLInjectorCS
                     procs = Process.GetProcessesByName(t);
                 }
                 setTargetById(procs[0].Id);
+                if (suspendOnInject)
+                {
+                    suspendProcess(procs[0]);
+                }
+
                 injectDll();
                 if (injectedCb != null)
                     injectedCb();
+
+
+                if (suspendOnInject)
+                {
+                    resumeProcess(procs[0]);
+                }
             }
             catch (ThreadAbortException e)
             {
@@ -87,10 +100,31 @@ namespace DLLInjectorCS
             return curThread;
         }
 
+        public void suspendProcess(Process target)
+        {
+            foreach (ProcessThread pt in target.Threads)
+            {
+                IntPtr hThread = Natives.OpenThread(Natives.ThreadAccess.SUSPEND_RESUME, false, (uint)pt.Id);
+                Natives.SuspendThread(hThread);
+                Natives.CloseHandle(hThread);
+            }
+        }
+
+        public void resumeProcess(Process target)
+        {
+            foreach (ProcessThread pt in target.Threads)
+            {
+                IntPtr hThread = Natives.OpenThread(Natives.ThreadAccess.SUSPEND_RESUME, false, (uint)pt.Id);
+                Natives.ResumeThread(hThread);
+                Natives.CloseHandle(hThread);
+            }
+        }
+
         public Injector()
         {
             IntPtr kernel32 = Natives.GetModuleHandle("Kernel32");
             loadLibAddr = Natives.GetProcAddress(kernel32, "LoadLibraryA");
+            suspendOnInject = false;
         }
 
         public Injector(string fln) : this()

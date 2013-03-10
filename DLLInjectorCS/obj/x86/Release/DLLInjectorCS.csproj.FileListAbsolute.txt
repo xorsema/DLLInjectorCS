@@ -1,10 +1,8 @@
 C:\Users\Max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\bin\Release\DLLInjectorCS.exe
 C:\Users\Max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\bin\Release\DLLInjectorCS.pdb
-C:\Users\Max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\obj\x86\Release\ResolveAssemblyReference.cache
 C:\Users\Max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\obj\x86\Release\DLLInjectorCS.DLLInjector.resources
 C:\Users\Max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\obj\x86\Release\DLLInjectorCS.Properties.Resources.resources
-C:\Users\Max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\obj\x86\Release\GenerateResource.read.1.tlog
-C:\Users\Max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\obj\x86\Release\GenerateResource.write.1.tlog
 C:\Users\Max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\obj\x86\Release\DLLInjectorCS.exe
 C:\Users\Max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\obj\x86\Release\DLLInjectorCS.pdb
 C:\Users\Max\documents\visual studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\bin\Release\DLLInjectorCS.exe.config
+C:\Users\Max\Documents\Visual Studio 2010\Projects\DLLInjectorCS\DLLInjectorCS\obj\x86\Release\DLLInjectorCS.csproj.GenerateResource.Cache
